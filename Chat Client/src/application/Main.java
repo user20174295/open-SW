@@ -24,8 +24,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 
-//Å¬¶óÀÌ¾ğÆ® ÇÁ·Î±×·¥ÀÌ¶û ¼­¹ö¶û ´Ù¸¥ ÇÁ·ÎÁ§Æ®¿¡¼­ ¸¸µå´Â ÀÌÀ¯ :
-//Å¬¶óÀÌ¾ğÆ® ÇÁ·ÎÁ§Æ®°¡ ¼­¹ö ÇÁ·ÎÁ§Æ®¿¡ Á¢¼ÓÇØ¼­ Ã¤ÆÃÇÏ´Â Çü½ÄÀÌ±â ¶§¹®¿¡ ´Ù¸¥ ÇÁ·ÎÁ§Æ®¿¡¼­ ¸¸µé¾îÁ®¾ßÇÔ 
+//í´ë¼ì´ì–¸íŠ¸ í”„ë¡œê·¸ë¨ì´ë‘ ì„œë²„ë‘ ë‹¤ë¥¸ í”„ë¡œì íŠ¸ì—ì„œ ë§Œë“œëŠ” ì´ìœ  :
+//í´ë¼ì´ì–¸íŠ¸ í”„ë¡œì íŠ¸ê°€ ì„œë²„ í”„ë¡œì íŠ¸ì— ì ‘ì†í•´ì„œ ì±„íŒ…í•˜ëŠ” í˜•ì‹ì´ê¸° ë•Œë¬¸ì— ë‹¤ë¥¸ í”„ë¡œì íŠ¸ì—ì„œ ë§Œë“¤ì–´ì ¸ì•¼í•¨ 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -42,54 +42,54 @@ import javafx.scene.layout.Priority;
 public class Main extends Application {
 	
 	Socket socket;
-	//server¿Í ´Ù¸£°Ô threadPoolÀ» ÀÌ¿ëÇÏÁö ¾Ê´Â ÀÌÀ¯ :
-	//ÀÌ°Ç Å¬¶óÀÌ¾ğÆ® ¸ŞÀÎÇÔ¼öÀÌ±â¿¡ ´õÀÌ»ó ¿©·¯ thread°¡ µ¿½Ã ´Ù¹ßÀûÀ¸·Î ÀÛµ¿ÇÏ´Â °æ¿ì°¡ ¾øÀ½.
-	//ÃÑ »ç¿ëÇÏ´Â ThreadÀÇ ¼ö´Â ¼­¹ö·ÎºÎÅÍ message¸¦ ¹Ş´Â ThreadÇÑ°³, ¼­¹ö·Î message¸¦ Àü¼ÛÇÏ´Â Thread ÇÑ°³·Î
-	//ÃÑ µÎ°³ÀÇ Thread¸¦ »ç¿ëÇÑ´Ù
+	//serverì™€ ë‹¤ë¥´ê²Œ threadPoolì„ ì´ìš©í•˜ì§€ ì•ŠëŠ” ì´ìœ  :
+	//ì´ê±´ í´ë¼ì´ì–¸íŠ¸ ë©”ì¸í•¨ìˆ˜ì´ê¸°ì— ë”ì´ìƒ ì—¬ëŸ¬ threadê°€ ë™ì‹œ ë‹¤ë°œì ìœ¼ë¡œ ì‘ë™í•˜ëŠ” ê²½ìš°ê°€ ì—†ìŒ.
+	//ì´ ì‚¬ìš©í•˜ëŠ” Threadì˜ ìˆ˜ëŠ” ì„œë²„ë¡œë¶€í„° messageë¥¼ ë°›ëŠ” Threadí•œê°œ, ì„œë²„ë¡œ messageë¥¼ ì „ì†¡í•˜ëŠ” Thread í•œê°œë¡œ
+	//ì´ ë‘ê°œì˜ Threadë¥¼ ì‚¬ìš©í•œë‹¤
 	TextArea textArea;
 	
-	//Å¬¶óÀÌ¾ğÆ® ÇÁ·Î±×·¥ µ¿ÀÛ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	//í´ë¼ì´ì–¸íŠ¸ í”„ë¡œê·¸ë¨ ë™ì‘ë©”ì†Œë“œì…ë‹ˆë‹¤.
 	public void startClient(String IP, int port) {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					socket = new Socket(IP, port); //¼ÒÄ¹ ÃÊ±âÈ­
-					receive(); //¼­¹ö·ÎºÎÅÍ ¸Ş¼¼Áö Àü´Ş¹Ş°Ô receiveÇÔ¼öºÒ·¯¿À±â
-				} catch(Exception e) {//¿À·ù ¹ß»ı½Ã
+					socket = new Socket(IP, port); //ì†Œìº£ ì´ˆê¸°í™”
+					receive(); //ì„œë²„ë¡œë¶€í„° ë©”ì„¸ì§€ ì „ë‹¬ë°›ê²Œ receiveí•¨ìˆ˜ë¶ˆëŸ¬ì˜¤ê¸°
+				} catch(Exception e) {//ì˜¤ë¥˜ ë°œìƒì‹œ
 					if(!socket.isClosed()) {
-						stopClient(); //²÷¾î¹ö¸®±â
-						System.out.println("[¼­¹ö Á¢¼Ó ½ÇÆĞ]");
-						Platform.exit(); //¾Æ¿¹ Á¾·á½ÃÅ°±â
+						stopClient(); //ëŠì–´ë²„ë¦¬ê¸°
+						System.out.println("[ì„œë²„ ì ‘ì† ì‹¤íŒ¨]");
+						Platform.exit(); //ì•„ì˜ˆ ì¢…ë£Œì‹œí‚¤ê¸°
 					}
 				}
 			}
 		};
-		thread.start();//thread¸¦ ½ÃÀÛ½ÃÅ´
+		thread.start();//threadë¥¼ ì‹œì‘ì‹œí‚´
 	}
 	
-	//Å¬¶óÀÌ¾ğÆ® ÇÁ·Î±×·¥ Á¾·á ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	//í´ë¼ì´ì–¸íŠ¸ í”„ë¡œê·¸ë¨ ì¢…ë£Œ ë©”ì†Œë“œì…ë‹ˆë‹¤.
 	public void stopClient() {
 		try {
 			if(socket != null && !socket.isClosed()) {
 				socket.close();
-				//¼ÒÄÏÀÌ ¿­·Á ÀÖ´Ù¸é ¼ÒÄÏÀ» ´İÀ½
+				//ì†Œì¼“ì´ ì—´ë ¤ ìˆë‹¤ë©´ ì†Œì¼“ì„ ë‹«ìŒ
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			//¿¡·¯¹ß»ı½Ã Ç¥½Ã
+			//ì—ëŸ¬ë°œìƒì‹œ í‘œì‹œ
 		}
 	}
 	
-	//¼­¹ö·ÎºÎÅÍ ¸Ş¼¼Áö¸¦ Àü´Ş¹Ş´Â ¸Ş¼Òµå ÀÔ´Ï´Ù.
+	//ì„œë²„ë¡œë¶€í„° ë©”ì„¸ì§€ë¥¼ ì „ë‹¬ë°›ëŠ” ë©”ì†Œë“œ ì…ë‹ˆë‹¤.
 	public void receive() {
-		while(true) {//¼­¹ö¿Í À¯»çÇÑ ÇüÅÂ·Î °è¼ÓÇØ¼­ ¹İº¹ÇÏ¿© ¸Ş¼¼Áö¸¦ Àü´Ş¹ŞÀ½
+		while(true) {//ì„œë²„ì™€ ìœ ì‚¬í•œ í˜•íƒœë¡œ ê³„ì†í•´ì„œ ë°˜ë³µí•˜ì—¬ ë©”ì„¸ì§€ë¥¼ ì „ë‹¬ë°›ìŒ
 			try {
-				InputStream in = socket.getInputStream();//ÀÔ·Â¹Ş´Âµ¥ »ç¿ëµÇ´Â inputstream
-				byte[] buffer = new byte[512];//°ªÀ» ÀúÀåÇÒ buffer
-				int length = in.read(buffer);//readÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ buffer¿¡ ÀÖ´Â °ªÀ» ¹Ş¾Æ¿È
-				if(length == -1) throw new IOException(); // ÀÔ·Â¹Ş´Â Áß¿¡ ¿À·ù°¡ »ı±ä´Ù¸é ioexception¹ß»ı
-				String message = new String(buffer, 0, length, "UTF-8");//¸Ş¼¼Áö¶õ º¯¼ö¿¡ ´ãÀ»¼ö ÀÖ°ÔÇÔ
-				Platform.runLater(()-> {//GUI¿ä¼Ò´Â ¹Ù·Î ÀÔ·ÂÀÌ ºÒ°¡ÇÏ¹Ç·Î runLaterÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ ÅØ½ºÆ®Ã¢ Á¶ÀÛ
+				InputStream in = socket.getInputStream();//ì…ë ¥ë°›ëŠ”ë° ì‚¬ìš©ë˜ëŠ” inputstream
+				byte[] buffer = new byte[512];//ê°’ì„ ì €ì¥í•  buffer
+				int length = in.read(buffer);//readí•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ bufferì— ìˆëŠ” ê°’ì„ ë°›ì•„ì˜´
+				if(length == -1) throw new IOException(); // ì…ë ¥ë°›ëŠ” ì¤‘ì— ì˜¤ë¥˜ê°€ ìƒê¸´ë‹¤ë©´ ioexceptionë°œìƒ
+				String message = new String(buffer, 0, length, "UTF-8");//ë©”ì„¸ì§€ë€ ë³€ìˆ˜ì— ë‹´ì„ìˆ˜ ìˆê²Œí•¨
+				Platform.runLater(()-> {//GUIìš”ì†ŒëŠ” ë°”ë¡œ ì…ë ¥ì´ ë¶ˆê°€í•˜ë¯€ë¡œ runLaterí•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ í…ìŠ¤íŠ¸ì°½ ì¡°ì‘
 					textArea.appendText(message);
 				});
 			} catch(Exception e) {
@@ -99,15 +99,15 @@ public class Main extends Application {
 		}
 	}
 	
-	//¼­¹ö·Î ¸Ş¼¼Áö¸¦ Àü¼ÛÇÏ´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	//ì„œë²„ë¡œ ë©”ì„¸ì§€ë¥¼ ì „ì†¡í•˜ëŠ” ë©”ì†Œë“œì…ë‹ˆë‹¤.
 	public void send(String message) {
 		Thread thread = new Thread() {
 			public void run() {
 				try {
-					OutputStream out = socket.getOutputStream();//¼­¹ö·Î ¸Ş¼¼Áö¸¦ º¸³¾ ¼ö ÀÖµµ·Ï ÇØÁÖ´Â ½ºÆ®¸²
-					byte[] buffer = message.getBytes("UTF-8");//º¸³¾ ¸Ş¼¼Áö °ªÀ» ÀúÀå½ÃÅ³ buffer
+					OutputStream out = socket.getOutputStream();//ì„œë²„ë¡œ ë©”ì„¸ì§€ë¥¼ ë³´ë‚¼ ìˆ˜ ìˆë„ë¡ í•´ì£¼ëŠ” ìŠ¤íŠ¸ë¦¼
+					byte[] buffer = message.getBytes("UTF-8");//ë³´ë‚¼ ë©”ì„¸ì§€ ê°’ì„ ì €ì¥ì‹œí‚¬ buffer
 					out.write(buffer);
-					out.flush();//À§ ÇàÀ§°¡ ¸ğµå ³¡³´À½À» ¾Ë¸®´Â ÄÚµå
+					out.flush();//ìœ„ í–‰ìœ„ê°€ ëª¨ë“œ ëë‚«ìŒì„ ì•Œë¦¬ëŠ” ì½”ë“œ
 				} catch (Exception e) {
 					stopClient();
 				}
@@ -117,15 +117,15 @@ public class Main extends Application {
 	}
 	
 	
-	//½ÇÁ¦·Î ÇÁ·Î±×·¥À» µ¿ÀÛ½ÃÅ°´Â ¸Ş¼ÒµåÀÔ´Ï´Ù.
+	//ì‹¤ì œë¡œ í”„ë¡œê·¸ë¨ì„ ë™ì‘ì‹œí‚¤ëŠ” ë©”ì†Œë“œì…ë‹ˆë‹¤.
 	@Override
 	public void start(Stage primaryStage) {
 		BorderPane map = new BorderPane();
-		Button newthing = new Button("Áöµµº¸±â");
+		Button newthing = new Button("ì§€ë„ë³´ê¸°");
 		newthing.minWidth(400);
 		map.setLeft(newthing);
 		newthing.setOnAction(e->{map();});
-		Label t = new Label("¾Æ·¡ ÅØ½ºÆ®Ã¢Àº ¸Ş¸ğÀåÀÔ´Ï´Ù");
+		Label t = new Label("ì•„ë˜ í…ìŠ¤íŠ¸ì°½ì€ ë©”ëª¨ì¥ì…ë‹ˆë‹¤");
 		map.setTop(t);
 		TextArea field = new TextArea();
 		map.setCenter(field);
@@ -133,15 +133,15 @@ public class Main extends Application {
 		
 		
 		
-		BorderPane root = new BorderPane();//ÆÒ Ãß°¡
-		root.setPadding(new Insets(5));//µğÀÚÀÎ ºÎµå·´°ÔÇØÁÖ´Â °Å
+		BorderPane root = new BorderPane();//íŒ¬ ì¶”ê°€
+		root.setPadding(new Insets(5));//ë””ìì¸ ë¶€ë“œëŸ½ê²Œí•´ì£¼ëŠ” ê±°
 		
 		HBox hbox = new HBox();
 		hbox.setSpacing(5);
 		
 		TextField userName = new TextField();
 		userName.setPrefWidth(150);
-		userName.setPromptText("´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		userName.setPromptText("ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		HBox.setHgrow(userName, Priority.ALWAYS);
 		
 		TextField IPText = new TextField("127.0.0.1");
@@ -149,12 +149,12 @@ public class Main extends Application {
 		portText.setPrefWidth(80);
 		
 		hbox.getChildren().addAll(userName, IPText, portText);
-		//½ÇÁúÀûÀ¸·Î  hbox¾È¿¡ ¼¼°³ÀÇ ÅØ½ºÆ® ÇÊµå°¡ ¸¸µé¾î Áú¼ö ÀÖµµ·Ï ¸¸µë
+		//ì‹¤ì§ˆì ìœ¼ë¡œ  hboxì•ˆì— ì„¸ê°œì˜ í…ìŠ¤íŠ¸ í•„ë“œê°€ ë§Œë“¤ì–´ ì§ˆìˆ˜ ìˆë„ë¡ ë§Œë“¬
 		root.setTop(hbox);
-		//borderpaneÀÇ À§ÂÊ¿¡ ´Ş¼ö ÀÖ°Ô ¹Ù²Ş
+		//borderpaneì˜ ìœ„ìª½ì— ë‹¬ìˆ˜ ìˆê²Œ ë°”ê¿ˆ
 		
 		textArea = new TextArea();
-		textArea.setEditable(false);//º¯°æ ºÒ°¡
+		textArea.setEditable(false);//ë³€ê²½ ë¶ˆê°€
 		root.setCenter(textArea);
 		
 		TextField input = new TextField();
@@ -163,11 +163,11 @@ public class Main extends Application {
 		
 		input.setOnAction(event -> {
 			send(userName.getText() + ": " + input.getText() + "\n");
-			input.setText("");//´Ù½Ã ÀÔ·ÂÇÒ ¼ö ÀÖµµ·Ï ÅØ½ºÆ® Ã¢À» ºñ¿öÁÜ
-			input.requestFocus(); //´Ù½Ã ¸Ş¼¼Áö º¸³¾ ¼ö ÀÖ°Ô fucus¼³Á¤
+			input.setText("");//ë‹¤ì‹œ ì…ë ¥í•  ìˆ˜ ìˆë„ë¡ í…ìŠ¤íŠ¸ ì°½ì„ ë¹„ì›Œì¤Œ
+			input.requestFocus(); //ë‹¤ì‹œ ë©”ì„¸ì§€ ë³´ë‚¼ ìˆ˜ ìˆê²Œ fucusì„¤ì •
 		});
 		
-		Button sendButton = new Button("º¸³»±â");
+		Button sendButton = new Button("ë³´ë‚´ê¸°");
 		sendButton.setDisable(true);
 		
 		sendButton.setOnAction(event->{
@@ -176,48 +176,48 @@ public class Main extends Application {
 			input.requestFocus();
 		});
 		
-		Button connectionButton = new Button("Á¢¼ÓÇÏ±â");
+		Button connectionButton = new Button("ì ‘ì†í•˜ê¸°");
 		connectionButton.setOnAction(event -> {
-			if(connectionButton.getText().equals("Á¢¼ÓÇÏ±â")) {
+			if(connectionButton.getText().equals("ì ‘ì†í•˜ê¸°")) {
 				int port = 9876;
 				try {
 					port = Integer.parseInt(portText.getText());
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
-				startClient(IPText.getText(), port); //Æ¯Á¤ IPÀÇ ¾î¶°ÇÑ port¹øÈ£·Î¸¸ Á¢¼ÓÇÏ´ÉÇÏ°Ô ¸¸µé¾îÁÜ
+				startClient(IPText.getText(), port); //íŠ¹ì • IPì˜ ì–´ë– í•œ portë²ˆí˜¸ë¡œë§Œ ì ‘ì†í•˜ëŠ¥í•˜ê²Œ ë§Œë“¤ì–´ì¤Œ
 				Platform.runLater(() ->{
-					textArea.appendText("[ Ã¤ÆÃ¹æ Á¢¼Ó]\n");
+					textArea.appendText("[ ì±„íŒ…ë°© ì ‘ì†]\n");
 				});
-				connectionButton.setText("Á¾·áÇÏ±â");//ÇöÀç »óÅÂ°¡ ¿¬°áµÈ »óÅÂÀÌ¹Ç·Î Á¾·áÇÏ±â·Î ¹Ù²ãÁÜ
-				input.setDisable(false); //»ç¿ëÀÚ°¡ ¹öÆ°À¸·Î ¾î¶°ÇÑ Ã³¸®¸¦ ÇÏ°Ô ÇÔ
+				connectionButton.setText("ì¢…ë£Œí•˜ê¸°");//í˜„ì¬ ìƒíƒœê°€ ì—°ê²°ëœ ìƒíƒœì´ë¯€ë¡œ ì¢…ë£Œí•˜ê¸°ë¡œ ë°”ê¿”ì¤Œ
+				input.setDisable(false); //ì‚¬ìš©ìê°€ ë²„íŠ¼ìœ¼ë¡œ ì–´ë– í•œ ì²˜ë¦¬ë¥¼ í•˜ê²Œ í•¨
 				sendButton.setDisable(false);
 				input.requestFocus();
-			}	else {//¸¸¾à ¿À·ù°¡³ª¼­ ´Ù¸¥ ¹öÆ°ÀÌ°Å³ª ÇÑ´Ù¸é
+			}	else {//ë§Œì•½ ì˜¤ë¥˜ê°€ë‚˜ì„œ ë‹¤ë¥¸ ë²„íŠ¼ì´ê±°ë‚˜ í•œë‹¤ë©´
 				stopClient();
 				Platform.runLater(() -> {
-					textArea.appendText("[ Ã¤ÆÃ¹æ ÅğÀå]\n");
+					textArea.appendText("[ ì±„íŒ…ë°© í‡´ì¥]\n");
 				});
-				connectionButton.setText("Á¢¼ÓÇÏ±â");
+				connectionButton.setText("ì ‘ì†í•˜ê¸°");
 				input.setDisable(true);
 				sendButton.setDisable(true);				
 			}
 		});
-		BorderPane pane = new BorderPane(); //pane»ı¼º
-		pane.setLeft(connectionButton);//¿ŞÂÊ¿¡ connectionButtonÀÌ µé¾î°¨
+		BorderPane pane = new BorderPane(); //paneìƒì„±
+		pane.setLeft(connectionButton);//ì™¼ìª½ì— connectionButtonì´ ë“¤ì–´ê°
 		pane.setCenter(input);
 		pane.setRight(sendButton);
 		map.setMinHeight(50);
 		
-		map.setBottom(root);//rootÀÇ ¾Æ·¡ÂÊ¿¡´Â ¹æ±İ¸¸µç 3°¡Áö°¡ µé¾î°¨
-		root.setBottom(pane);//rootÀÇ ¾Æ·¡ÂÊ¿¡´Â ¹æ±İ¸¸µç 3°¡Áö°¡ µé¾î°¨
+		map.setBottom(root);//rootì˜ ì•„ë˜ìª½ì—ëŠ” ë°©ê¸ˆë§Œë“  3ê°€ì§€ê°€ ë“¤ì–´ê°
+		root.setBottom(pane);//rootì˜ ì•„ë˜ìª½ì—ëŠ” ë°©ê¸ˆë§Œë“  3ê°€ì§€ê°€ ë“¤ì–´ê°
 		Scene scene = new Scene(map, 700, 500);
-		primaryStage.setTitle("[ Ã¤ÆÃ Å¬¶óÀÌ¾ğÆ® ]");
-		primaryStage.setScene(scene); //½Åµî·Ï
-		primaryStage.setOnCloseRequest(event -> stopClient()); //»ç¿ëÀÚ°¡ È­¸é ¹Ş±â ¹öÆ°À» ´©¸£¸é Å¬¶óÀÌ¾ğÆ® Á¾·á
-		primaryStage.show();//º¸¿©Áö°Ô ¸¸µé±â
+		primaryStage.setTitle("[ ì±„íŒ… í´ë¼ì´ì–¸íŠ¸ ]");
+		primaryStage.setScene(scene); //ì‹ ë“±ë¡
+		primaryStage.setOnCloseRequest(event -> stopClient()); //ì‚¬ìš©ìê°€ í™”ë©´ ë°›ê¸° ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ í´ë¼ì´ì–¸íŠ¸ ì¢…ë£Œ
+		primaryStage.show();//ë³´ì—¬ì§€ê²Œ ë§Œë“¤ê¸°
 		
-		connectionButton.requestFocus();//±âº»ÀûÀ¸·Î ÇÁ·Î±×·¥ ½ÇÇà½Ã Á¢¼ÓÇÏ±â ¹öÆ°ÀÌ Æ÷Ä¿½ÌµÇ°Ô ¸¸µë
+		connectionButton.requestFocus();//ê¸°ë³¸ì ìœ¼ë¡œ í”„ë¡œê·¸ë¨ ì‹¤í–‰ì‹œ ì ‘ì†í•˜ê¸° ë²„íŠ¼ì´ í¬ì»¤ì‹±ë˜ê²Œ ë§Œë“¬
 		
 		
 		
@@ -226,7 +226,7 @@ public class Main extends Application {
 	public void map() {
    	 // Creating and running Chromium engine
        EngineOptions options =
-               EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("1BNDHFSC1G1IVW65PORHPPAMDGDPCA0WYK59V2VE3XUTMKYAVK74KBZBSKNPMIQ5SC92JW").build();
+               EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("ë¼ì´ì„¼ìŠ¤ë¥¼ ").build();
        Engine engine = Engine.newInstance(options);
        Browser browser = engine.newBrowser();
 
@@ -262,7 +262,7 @@ public class Main extends Application {
 		
    }
 	
-	//ÇÁ·Î±×·¥ÀÇ ÁøÀÔÁ¡ ÀÔ´Ï´Ù.
+	//í”„ë¡œê·¸ë¨ì˜ ì§„ì…ì  ì…ë‹ˆë‹¤.
 	public static void main(String[] args) {
 		launch(args);
 	}
