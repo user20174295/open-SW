@@ -226,7 +226,7 @@ public class Main extends Application {
 	public void map() {
    	 // Creating and running Chromium engine
        EngineOptions options =
-               EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("라이센스를 ").build();
+               EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("라이센스를").build();
        Engine engine = Engine.newInstance(options);
        Browser browser = engine.newBrowser();
 
