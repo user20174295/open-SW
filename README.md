@@ -23,4 +23,5 @@
 
 참고한 오픈소스?
 -> https://github.com/KongSunHwan/JAVA_chat.git
+
 -> https://www.teamdev.com/jxbrowser -->여기선 jxbroswer설치후 javafx부분 소스만 가져옴
